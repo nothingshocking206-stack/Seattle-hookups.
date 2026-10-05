@@ -1,0 +1,6 @@
+# Pinned runtime dependencies for the Seattle Hookups full-stack MVP.
+# Install:  python -m venv .venv && .venv/bin/pip install -r requirements.txt
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+bcrypt==4.2.1
+python-multipart==0.0.20

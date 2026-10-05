@@ -1,0 +1,14 @@
+# Render one-click deploy (render.com). Uses a persistent disk for SQLite + uploads.
+services:
+  - type: web
+    name: seattle-hookups
+    runtime: docker
+    plan: starter
+    healthCheckPath: /api/safety
+    disk:
+      name: sh-data
+      mountPath: /data
+      sizeGB: 1
+    envVars:
+      - key: COOKIE_SECURE
+        value: "1"

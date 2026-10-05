@@ -1,0 +1,27 @@
+# Fly.io deploy config (alternative to Render).
+app = "seattle-hookups"
+primary_region = "sea"   # Seattle, fittingly
+
+[build]
+  dockerfile = "Dockerfile"
+
+[http_service]
+  internal_port = 8000
+  force_https = true
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 1   # keep 1 warm so the app is responsive
+
+  [[http_service.checks]]
+    interval = "30s"
+    timeout = "5s"
+    grace_period = "10s"
+    method = "GET"
+    path = "/api/safety"
+
+[mounts]
+  source = "sh_data"       # create first:  fly volumes create sh_data -r sea -s 1
+  destination = "/data"
+
+[env]
+  COOKIE_SECURE = "1"
